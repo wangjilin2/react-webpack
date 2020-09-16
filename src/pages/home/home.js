@@ -1,72 +1,61 @@
 import React, { Component } from "react";
-import { Layout, Menu } from "antd";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { Layout } from "antd";
+
+import memoryUtils from "../../utils";
 
 import "./home.less";
+import Left from "../../component/left-nav";
+import Head from "../../component/header";
+import Main from "../main/main";
+import Category from "../category/category";
+import Bar from "../charts/bar";
+import Line from "../charts/line";
+import Pie from "../charts/pie";
+import Product from "../product/product";
+import Role from "../role/role";
+import User from "../user/user";
+import Breadcrumb from "../breadcrumb/breadcrumb";
 
 const { Header, Footer, Sider, Content } = Layout;
-const { SubMenu } = Menu;
 
 export default class Admin extends Component {
   handleClick(e) {
     console.log("click", e);
   }
   render() {
+    const user = memoryUtils.user;
+    if (!user || user._id) {
+      return <Redirect to="/login" />;
+    }
     return (
       <Layout className="container">
-        <Header>react</Header>
-        <Layout className="sider">
+        <Header>
+          <Head />
+        </Header>
+        <Layout>
           <Sider>
-            <Menu
-              onClick={this.handleClick}
-              style={{ width: 256 }}
-            //  mode="vertical"
-            mode='inline'
-              theme="dark"
-            >
-              <SubMenu
-                key="sub1"
-                icon={<MailOutlined />}
-                title="Navigation One"
-              >
-                <Menu.ItemGroup title="Item 1">
-                  <Menu.Item key="1">Option 1</Menu.Item>
-                  <Menu.Item key="2">Option 2</Menu.Item>
-                </Menu.ItemGroup>
-                <Menu.ItemGroup title="Iteom 2">
-                  <Menu.Item key="3">Option 3</Menu.Item>
-                  <Menu.Item key="4">Option 4</Menu.Item>
-                </Menu.ItemGroup>
-              </SubMenu>
-              <SubMenu
-                key="sub2"
-                icon={<AppstoreOutlined />}
-                title="Navigation Two"
-              >
-                <Menu.Item key="5">Option 5</Menu.Item>
-                <Menu.Item key="6">Option 6</Menu.Item>
-                <SubMenu key="sub3" title="Submenu">
-                  <Menu.Item key="7">Option 7</Menu.Item>
-                  <Menu.Item key="8">Option 8</Menu.Item>
-                </SubMenu>
-              </SubMenu>
-              <SubMenu
-                key="sub4"
-                icon={<SettingOutlined />}
-                title="Navigation Three"
-              >
-                <Menu.Item key="9">Option 9</Menu.Item>
-                <Menu.Item key="10">Option 10</Menu.Item>
-                <Menu.Item key="11">Option 11</Menu.Item>
-                <Menu.Item key="12">Option 12</Menu.Item>
-              </SubMenu>
-            </Menu>
+            <Left />
           </Sider>
-          <Content>Content</Content>
+          <Layout>
+            <Breadcrumb />
+            <Content className="content">
+              <Switch>
+                <Route path="/main" component={Main} />
+                <Route path="/category" component={Category} />
+                <Route path="/charts/bar" component={Bar} />
+                <Route path="/charts/line" component={Line} />
+                <Route path="/charts/pie" component={Pie} />
+                <Route path="/product" component={Product} />
+                <Route path="/role" component={Role} />
+                <Route path="/user" component={User} />
+                <Redirect to="/main" />
+              </Switch>
+            </Content>
+            <Footer style={{ textAlign: "center" }}>
+              wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+            </Footer>
+          </Layout>
         </Layout>
       </Layout>
     );

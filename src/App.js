@@ -1,18 +1,21 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Login from "./pages/login/login.js";
 import Home from "./pages/home/home.js";
+import Hooks from './pages/hooks/hooks';
+import Reducer from './pages/useReducer/index'
+import TreeDemo from './pages/tree'
 
 class App extends React.Component {
   render() {
     return (
-      <Router>
+      <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/admin" component={Home} />
+          <Route path="/login"  component={Login} />
+          <Route path="/" component={Home} />
         </Switch>
-      </Router>
+      </BrowserRouter>
     );
   }
 }
