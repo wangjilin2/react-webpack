@@ -20,7 +20,7 @@ class Login extends Component {
       const user = value;
       memoryUtils.user = user; // 存在内存
       storageUtils.saveUser(user)
-      this.props.history.replace("/");
+      this.props.history.replace("/home");
       return true;
     } else if (value.username !== "admin") {
       message.error("用户名错误！");
@@ -41,7 +41,7 @@ class Login extends Component {
     const user=memoryUtils.user;
     if(Object.keys(user).length){
       console.log('redirect admin',user);
-      return <Redirect to='/'/>
+      return <Redirect to='/home'/>
     }
     const layout = {
       labelCol: { span: 8 },

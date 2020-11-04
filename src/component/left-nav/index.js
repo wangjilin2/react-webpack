@@ -35,7 +35,7 @@ export default class LeftNav extends Component {
             icon={<AppstoreOutlined />}
             title={item.title}
           >
-            {this.getMenuNodes(item.children)}
+            {this.getMenuNodes_map(item.children)}
           </SubMenu>
         );
       }
@@ -72,7 +72,7 @@ export default class LeftNav extends Component {
         <Menu
           onClick={this.handleClick}
           className="container_leftnav"
-          defaultSelectedKeys={["/main"]}
+          defaultSelectedKeys={["/home/main"]}
           // defaultOpenKeys={["sub1"]}
           mode="inline"
           theme="dark"
